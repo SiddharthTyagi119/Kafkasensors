@@ -17,6 +17,7 @@ class Generic:
     def to_dict(self):
         return self.__dict__
 
+#prepare recoed for every time. It will read the ile and return us prepared record
     @classmethod
     def get_object(cls, file_path):
         chunk_df = pd.read_csv(file_path, chunksize=10)
@@ -61,11 +62,13 @@ class Generic:
         print(schema)
         return schema
         
-
+#function to generate the schema by passing file location
     @classmethod
     def get_schema_to_produce_consume_data(cls, file_path):
+        #reading the file record in chunks
         columns = next(pd.read_csv(file_path, chunksize=10)).columns
 
+#sample of schema,preparing the schema. in this format we have to send the data
         schema = dict()
         schema.update({
             "$id": "http://example.com/myURI.schema.json",

@@ -1,19 +1,25 @@
 
 import os
 
+#it allows kafa(server) and IOT DEVICE(client) to make a secure connection, it allows client and server to communicate
 
+#authentication related variables
 SECURITY_PROTOCOL="SASL_SSL"
 SSL_MACHENISM="PLAIN"
-API_KEY = os.getenv('API_KEY',None)
-ENDPOINT_SCHEMA_URL  = os.getenv('ENDPOINT_SCHEMA_URL',None)
-API_SECRET_KEY = os.getenv('API_SECRET_KEY',None)
-BOOTSTRAP_SERVER = os.getenv('BOOTSTRAP_SERVER',None)
-# SECURITY_PROTOCOL = os.getenv('SECURITY_PROTOCOL',None)
-# SSL_MACHENISM = os.getenv('SSL_MACHENISM',None)
-SCHEMA_REGISTRY_API_KEY = os.getenv('SCHEMA_REGISTRY_API_KEY',None)
-SCHEMA_REGISTRY_API_SECRET = os.getenv('SCHEMA_REGISTRY_API_SECRET',None)
 
 
+#cloud api details
+API_KEY = "5ODTVLPKXBR4QA6F" 
+API_SECRET_KEY =  "PxbejWolYltuhIyrjXXXldW+caDRVw16k6Dn64oFsLTE5wGmRMB/RhykXWz0WqVJ" 
+BOOTSTRAP_SERVER = "pkc-41p56.asia-south1.gcp.confluent.cloud:9092"
+
+#schema related variables
+ENDPOINT_SCHEMA_URL  = "https://psrc-znpo0.ap-southeast-2.aws.confluent.cloud"
+SCHEMA_REGISTRY_API_KEY = "326H6IPVGDGD7N5C" 
+SCHEMA_REGISTRY_API_SECRET = "fF/ay0lEgQz8b1CjWcT06fRxHunS1V7krNJB7UaFgoxG4m2IMQ3CqbLWq6w6C6hq"
+
+
+#this function will give us the kafka cluster configuration details
 def sasl_conf():
 
     sasl_conf = {'sasl.mechanism': SSL_MACHENISM,
@@ -24,11 +30,11 @@ def sasl_conf():
                 'sasl.username': API_KEY,
                 'sasl.password': API_SECRET_KEY
                 }
-    print(sasl_conf)
+    #print(sasl_conf)
     return sasl_conf
 
 
-
+#this function will give us the schema configuration details
 def schema_config():
     return {'url':ENDPOINT_SCHEMA_URL,
     
