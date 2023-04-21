@@ -17,9 +17,10 @@ class Generic:
     def to_dict(self):
         return self.__dict__
 
-#prepare recoed for every time. It will read the ile and return us prepared record
+#prepare record for every time. It will read the file and return us prepared record
     @classmethod
     def get_object(cls, file_path):
+        #reading 10 record at a time and returning the record as yield
         chunk_df = pd.read_csv(file_path, chunksize=10)
         n_row = 0
         for df in chunk_df:
@@ -32,8 +33,7 @@ class Generic:
 
     @classmethod
     def export_schema_to_create_confluent_schema(cls, file_path):
-        columns = next(pd.read_csv(file_path, chunksize=10)).columns
-
+        columns = next(pd.read_csv(file_path, chunksize=10)).columns  
         schema = dict()
         schema.update({
                     "type": "record",
@@ -62,13 +62,14 @@ class Generic:
         print(schema)
         return schema
         
-#function to generate the schema by passing file location
+#function to generate the schema by passing the file location
     @classmethod
     def get_schema_to_produce_consume_data(cls, file_path):
-        #reading the file record in chunks
+        #reading the file record in chunks,#it will give us the columns name
         columns = next(pd.read_csv(file_path, chunksize=10)).columns
 
-#sample of schema,preparing the schema. in this format we have to send the data
+        #sample of schema,preparing the schema. in this format we have to send the data
+        #appending all the column names with the schema in the dictionary
         schema = dict()
         schema.update({
             "$id": "http://example.com/myURI.schema.json",
@@ -91,6 +92,7 @@ class Generic:
     
         schema = json.dumps(schema)
 
+        #returning the schema
         print(schema)
         return schema
         

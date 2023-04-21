@@ -1,1 +1,1 @@
-[kafka_config.init>>producer.py]
+[kafka_config.init>>producer_main.py with the json_producer and genric.py]

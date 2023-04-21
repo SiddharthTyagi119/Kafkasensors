@@ -64,21 +64,34 @@ def delivery_report(err, msg):
     logging.info('User record {} successfully produced to {} [{}] at offset {}'.format(
         msg.key(), msg.topic(), msg.partition(), msg.offset()))
 
-
+#getting the schema by passing the file location
+#function to generate the schema
 def product_data_using_file(topic,file_path):
     logging.info(f"Topic: {topic} file_path:{file_path}")
     schema_str = Generic.get_schema_to_produce_consume_data(file_path=file_path)
+    #getting the secrets and keys from kafka portal
     schema_registry_conf = schema_config()
     schema_registry_client = SchemaRegistryClient(schema_registry_conf)
+
+    #we have created a function to convert the object into the format of dict so that it can be utilize by json seralizer
+    #seralize the object. seralizing the data. converting the data in a certain format so that it can be stored in a disk
     string_serializer = StringSerializer('utf_8')
+    #seralizing the data object into dict
+    #calling the object to dict and it will give you the object in form of dict
+    #then you can serialize the object
     json_serializer = JSONSerializer(schema_str, schema_registry_client, instance_to_dict)
+
+    #just to connect with kafka server
     producer = Producer(sasl_conf())
 
     print("Producing user records to topic {}. ^C to exit.".format(topic))
     # while True:
     # Serve on_delivery callbacks from previous calls to produce()
+    #it will make sure data is produce successfully when we send it
     producer.poll(0.0)
     try:
+        #reading a record(row) at a time and preparing the object then send that object to kafka
+        #  
         for instance in Generic.get_object(file_path=file_path):
             print(instance)
             logging.info(f"Topic: {topic} file_path:{instance.to_dict()}")
