@@ -49,7 +49,7 @@ def car_to_dict(car: Generic, ctx):
     # User._address must not be serialized; omit from dict
     return car.record
 
-
+#it is a kind of an acknowledgement that will raise the error if there is any issue
 def delivery_report(err, msg):
     """
     Reports the success or failure of a message delivery.
@@ -81,24 +81,29 @@ def product_data_using_file(topic,file_path):
     #then you can serialize the object
     json_serializer = JSONSerializer(schema_str, schema_registry_client, instance_to_dict)
 
-    #just to connect with kafka server
+
+
+########## Producer ###########################
+#to produce the data to kafka
+    #creating producer class, just to connect with kafka server
     producer = Producer(sasl_conf())
 
     print("Producing user records to topic {}. ^C to exit.".format(topic))
     # while True:
     # Serve on_delivery callbacks from previous calls to produce()
-    #it will make sure data is produce successfully when we send it
+    #it will make sure data is produce successfully when we send any data 
     producer.poll(0.0)
     try:
-        #reading a record(row) at a time and preparing the object then send that object to kafka
-        #  
+        #reading specific no. of records at a time and preparing the object then send that object to kafka
+        #it will pick the one row from csv and create the object and in return it will give you the dict object
+        #read data >>create object >>send data to kafka
         for instance in Generic.get_object(file_path=file_path):
             print(instance)
             logging.info(f"Topic: {topic} file_path:{instance.to_dict()}")
             producer.produce(topic=topic,
                              key=string_serializer(str(uuid4()), instance.to_dict()),
                              value=json_serializer(instance, SerializationContext(topic, MessageField.VALUE)),
-                             on_delivery=delivery_report)
+                             on_delivery=delivery_report) #delivery report- acknowledging the data
             print("\nFlushing records...")
             producer.flush()
     except KeyboardInterrupt:
