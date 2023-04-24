@@ -1,1 +1,2 @@
 [kafka_config.init>>producer_main.py with the json_producer and genric.py]
+[consumer.main>>json_consumer.py>>mongodb.py]
