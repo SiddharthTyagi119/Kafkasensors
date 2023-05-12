@@ -9,7 +9,7 @@ class MongodbOperation:
 
     def __init__(self) -> None:
         #client to connect with mongo db server, passing the url of client
-        MONGO_DB_URL="mongodb+srv://siddharthtyagi1:Corona#12#@cluster0.cenkgn4.mongodb.net/test"
+        MONGO_DB_URL="mongodb+srv://sidtyagi05:Corona1212@cluster0.thnqzt7.mongodb.net/"
         self.client = pymongo.MongoClient(MONGO_DB_URL,tlsCAFile=ca)
         #creating db
         self.db_name="ineuron"
