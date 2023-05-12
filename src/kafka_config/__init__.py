@@ -9,14 +9,14 @@ SSL_MACHENISM="PLAIN"
 
 
 #cloud api details. cluster related info
-API_KEY = "H3W2IQXGETQZBNU" 
-API_SECRET_KEY =  "7vuJ1RQgIGOA9Hby2f13nhfd4Slih5uD/ubmbg6rKNt6jTgaDc6FqfGCNPpmIBs" 
+API_KEY = "H3W2IQXGETQZBNUWER" 
+API_SECRET_KEY =  "7vuJ1RQgIGOA9Hby2f13nhfd4Slih5uD/ubmbg6rKNt6jTgaDc6FqfGCNPpmIBsghd" 
 BOOTSTRAP_SERVER = "pkc-xrnwx.asia-south2.gcp.confluent.cloud:909"
 
 #schema related variables
 ENDPOINT_SCHEMA_URL  = "https://psrc-znpo0.ap-southeast-2.aws.confluent.cloud"
-SCHEMA_REGISTRY_API_KEY = "SZYXSWDFZEBRRF" 
-SCHEMA_REGISTRY_API_SECRET = "+LY68DPHY+bCRCtmVuLaPVgRoKCZmdWoakMoJ46mSO8a698TwC4MfpDIeXoph"
+SCHEMA_REGISTRY_API_KEY = "SZYXSWDFZEBRRFrtr" 
+SCHEMA_REGISTRY_API_SECRET = "+LY68DPHY+bCRCtmVuLaPVgRoKCZmdWoakMoJ46mSO8a698TwC4MfpDIeXophkdjjem"
 
 
 #this function will give us the kafka cluster configuration details
